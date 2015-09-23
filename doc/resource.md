@@ -6,3 +6,4 @@ git remote set-url origin git@github.com:username/repo.git
 [A RESTful Micro-Framework in Go](http://dougblack.io/words/a-restful-micro-framework-in-go.html)  
 [IDEsAndTextEditorPlugins](https://github.com/golang/go/wiki/IDEsAndTextEditorPlugins)  
 [Golang json things](http://play.golang.org/p/WxRgpycMaH)  
+[Build Web App with Golang](https://github.com/astaxie/build-web-application-with-golang/blob/master/zh/preface.md)  

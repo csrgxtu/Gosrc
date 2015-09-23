@@ -36,7 +36,8 @@ func (this *MainController) Get() {
 	// 	msg: "Successful"}
 	// 	// data: []Article{article, article, article}}
 	// mapD := map[string]int{"apple": 5, "lettuce": 7}
-	mapD := map[string]string{"id": "3df89ghsd", "title": "Think Differently", "content": "In this book mainly told u that the truth about the everythings...", "author": "Archer", "created_at": "2015-09-23 21:00:00"}
+	mapD := map[string]string{"id": "332dsfa", "data": map[string]string{"name": "archer"}}
+	// mapD := map[string]string{"id": "3df89ghsd", "title": "Think Differently", "content": "In this book mainly told u that the truth about the everythings...", "author": "Archer", "created_at": "2015-09-23 21:00:00"}
 	this.Data["json"] = mapD
 	this.ServeJson()
 }
