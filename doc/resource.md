@@ -1,4 +1,6 @@
 [Resources for new Go programmers](http://dave.cheney.net/resources-for-new-go-programmers)  
 [Learn Golang Wiki](https://github.com/golang/go/wiki/Learn)  
 [A series of golang tutorials with youtube videos.](https://gist.github.com/honkskillet/bd1f72223dd8e06b5ce6)  
-git remote set-url origin git@github.com:username/repo.git
+git remote set-url origin git@github.com:username/repo.git  
+[A Survey of 5 Go Web Frameworks](http://thenewstack.io/a-survey-of-5-go-web-frameworks/)  
+[A RESTful Micro-Framework in Go](http://dougblack.io/words/a-restful-micro-framework-in-go.html)  
