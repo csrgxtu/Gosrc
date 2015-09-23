@@ -2,7 +2,6 @@ package main
 
 import (
 	"github.com/astaxie/beego"
-	// "encoding/json"
 )
 
 type ResData struct {
@@ -16,10 +15,8 @@ type MainController struct {
 
 func (this *MainController) Get() {
 	mapD := map[string]int{"apple": 5, "lettuce": 7}
-	// mapB, _ := json.Marshal(mapD)
 	this.Data["json"] = mapD
 	this.ServeJson()
-  // this.Ctx.WriteString("yo, man")
 }
 
 func main() {
