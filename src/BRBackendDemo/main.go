@@ -1,6 +1,7 @@
 package main
 
 import (
+	_ "BRBackendDemo/routers"
 	"github.com/astaxie/beego"
 )
 
@@ -20,6 +21,7 @@ func (this *MainController) Get() {
 }
 
 func main() {
+	beego.Router("/", &MainController{})
 	beego.Router("/article", &MainController{})
 	beego.Run()
 }
