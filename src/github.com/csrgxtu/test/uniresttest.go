@@ -1,9 +1,11 @@
 package main
 
+import "fmt"
 import "github.com/csrgxtu/unirest"
 
 func main() {
   var url = "http://www.douban.com"
 
-  unirest.DoGet(url)
+  fmt.Println(unirest.DoGet(url))
+  // fmt.Println(body)
 }
