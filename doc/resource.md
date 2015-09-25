@@ -7,3 +7,4 @@ git remote set-url origin git@github.com:username/repo.git
 [IDEsAndTextEditorPlugins](https://github.com/golang/go/wiki/IDEsAndTextEditorPlugins)  
 [Golang json things](http://play.golang.org/p/WxRgpycMaH)  
 [Build Web App with Golang](https://github.com/astaxie/build-web-application-with-golang/blob/master/zh/preface.md)  
+[Go 程序的基本结构和要素](https://github.com/Unknwon/the-way-to-go_ZH_CN/blob/master/eBook/04.2.md)  

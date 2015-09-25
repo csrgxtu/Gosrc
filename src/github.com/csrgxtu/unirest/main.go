@@ -4,7 +4,7 @@ package main
 // import "net/http"
 // import "os"
 // import "io/ioutil"
-import "./unirest"
+// import "./unirest"
 
 // func doGet(url string) {
 //   fmt.Println(url)
