@@ -10,3 +10,6 @@ git remote set-url origin git@github.com:username/repo.git
 [Go 程序的基本结构和要素](https://github.com/Unknwon/the-way-to-go_ZH_CN/blob/master/eBook/04.2.md)  
 [Go func named return value](https://github.com/Unknwon/the-way-to-go_ZH_CN/blob/master/eBook/06.2.md)  
 [MySQL Beego ORM type table](https://github.com/beego/beedoc/blob/master/zh-CN/mvc/model/models.md)  
+[Beego 数据库模型文件讲解1](http://www.oschina.net/translate/go-building-web-applications-beego-part-2)  
+[Beego 数据库模型文件讲解2](http://golanghome.com/post/289)  
+[Beego Config File Introduction](https://github.com/beego/beedoc/blob/master/zh-CN/mvc/controller/config.md)  
