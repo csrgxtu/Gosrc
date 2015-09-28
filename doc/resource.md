@@ -13,3 +13,5 @@ git remote set-url origin git@github.com:username/repo.git
 [Beego 数据库模型文件讲解1](http://www.oschina.net/translate/go-building-web-applications-beego-part-2)  
 [Beego 数据库模型文件讲解2](http://golanghome.com/post/289)  
 [Beego Config File Introduction](https://github.com/beego/beedoc/blob/master/zh-CN/mvc/controller/config.md)  
+[beego 的文章](http://astaxie.me/beego/tutorial/)  
+[build-web-application-with-golang](https://www.gitbook.com/book/astaxie/build-web-application-with-golang/details)  
