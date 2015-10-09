@@ -19,3 +19,5 @@ git remote set-url origin git@github.com:username/repo.git
 [Beego 中获取表单参数](http://golanghome.com/post/327)  
 [ResourceChina beego 入门](http://my.oschina.net/astaxie/blog/124040)  
 [Go Command Tutorial](https://github.com/hyper-carrot/go_command_tutorial)  
+[Beego In Action](https://www.gitbook.com/book/lei-cao/beego-in-action/details)  
+
