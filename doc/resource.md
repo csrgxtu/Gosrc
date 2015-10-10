@@ -21,3 +21,4 @@ git remote set-url origin git@github.com:username/repo.git
 [Go Command Tutorial](https://github.com/hyper-carrot/go_command_tutorial)  
 [Beego In Action](https://www.gitbook.com/book/lei-cao/beego-in-action/details)  
 [Go slice and array](https://yigrherb.com/2015/08/21/array-array-in-golang-and-go-slice-learning-editing.html)  
+[Go standard lib](https://github.com/polaris1119/The-Golang-Standard-Library-by-Example)  
