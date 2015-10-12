@@ -19,7 +19,7 @@ func main() {
     fmt.Println("no connection string provided")
     os.Exit(1)
   }
-
+  uri := "mongodb://user:pass@server.compose.io/db_name"
   sess, err := mgo.Dial(uri)
   if err != nil {
     fmt.Printf("Can't connect to mongo, go error %v\n", err)
