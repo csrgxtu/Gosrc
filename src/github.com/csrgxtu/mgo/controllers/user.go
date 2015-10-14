@@ -47,6 +47,9 @@ func (uc UserController) GetUser(w http.ResponseWriter, r *http.Request, p httpr
 
     // Marshal provided interface into JSON structure
     uj, _ := json.Marshal(u)
+    fmt.Println(u)
+    fmt.Println(uj)
+    fmt.Println(string(uj))
 
     // Write content-type, statuscode, payload
     w.Header().Set("Content-Type", "application/json")

@@ -8,6 +8,8 @@ import (
     "github.com/julienschmidt/httprouter"
     "github.com/csrgxtu/mgo/controllers"
     "gopkg.in/mgo.v2"
+
+    "fmt"
 )
 
 func main() {
@@ -25,6 +27,7 @@ func main() {
     r.DELETE("/user/:id", uc.RemoveUser)
 
     // Fire up the server
+    fmt.Println("Server started at localhost:3000")
     http.ListenAndServe("localhost:3000", r)
 }
 
