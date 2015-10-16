@@ -25,3 +25,4 @@ git remote set-url origin git@github.com:username/repo.git
 [Building a REST Service with Golang - Part 1 (Setup)](http://stevenwhite.com/building-a-rest-service-with-golang-1/)  
 [Building a REST Service with Golang - Part 2 (Basic Webserver)](http://stevenwhite.com/building-a-rest-service-with-golang-2/)  
 [Building a REST Service with Golang - Part 3 (Adding a Backend)](http://stevenwhite.com/building-a-rest-service-with-golang-3/)  
+[配置 VIM 的 Go 语言开发环境](http://wuwen.org/article/38/setup-vim-go-dev-environment.html)  
