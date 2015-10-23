@@ -4,6 +4,7 @@ import (
   jwt "github.com/dgrijalva/jwt-go"
   "io/ioutil"
   "net/http"
+  "encoding/json"
   "io"
   "os"
   "fmt"
@@ -16,6 +17,12 @@ var (
   privateKey []byte
   publicKey []byte
 )
+
+type Result struct {
+  Code int `json:"code"`
+  Msg string `json:"msg"`
+  Data string `json:"data"`
+}
 
 func main() {
   http.HandleFunc("/auth", Auth)
@@ -36,15 +43,16 @@ func Auth(res http.ResponseWriter, req *http.Request) {
 
   tokenString, _ := token.SignedString(privateKey)
 
+  rt, _ := json.Marshal(Result{http.StatusOK, "Successful", tokenString})
+  res.Header().Set("Content-Type", "application/json")
   res.WriteHeader(http.StatusOK)
-  fmt.Fprintf(res, tokenString)
+  res.Write(rt)
 }
 
 func GetUserInfo(res http.ResponseWriter, req *http.Request) {
   AuthKey := http.CanonicalHeaderKey("authorization")
-  // tokenString := strings.TrimLeft(req.Header.Get(AuthKey), "Bearer")
   tokenString := strings.Replace(req.Header.Get(AuthKey), "Bearer ", "", -1)
-  fmt.Println(tokenString)
+  // fmt.Println(tokenString)
 
   token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
     fmt.Println(token)
@@ -53,13 +61,20 @@ func GetUserInfo(res http.ResponseWriter, req *http.Request) {
 
   if err == nil && token.Valid {
       fmt.Println("Your token is valid.  I like your style.")
+
+      rt, _ := json.Marshal(Result{http.StatusOK, "Successful", tokenString})
+      res.Header().Set("Content-Type", "application/json")
+      res.WriteHeader(http.StatusOK)
+      res.Write(rt)
   } else {
       fmt.Println("This token is terrible!  I cannot accept this.")
       fmt.Println(err)
-  }
 
-  res.WriteHeader(http.StatusOK)
-  fmt.Fprint(res, tokenString)
+      rt, _ := json.Marshal(Result{http.StatusUnauthorized, "Token Unauthorized", tokenString})
+      res.Header().Set("Content-Type", "application/json")
+      res.WriteHeader(http.StatusUnauthorized)
+      res.Write(rt)
+  }
 }
 
 func init() {

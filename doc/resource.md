@@ -29,3 +29,4 @@ git remote set-url origin git@github.com:username/repo.git
 [Tokens (JWT) in Go](https://sendgrid.com/blog/tokens-tokens-intro-json-web-tokens-jwt-go/)  [Tokens & More Tokens! An Intro to JSON Web Tokens (JWT) in Go](https://sendgrid.com/blog/tokens-tokens-intro-json-web-tokens-jwt-go/)  
 [A userful example app go jwt](https://raw.githubusercontent.com/dgrijalva/jwt-go/master/cmd/jwt/app.go)  
 [jwt doc](https://godoc.org/github.com/dgrijalva/jwt-go#example-Parse)  
+[golang http json](http://www.alexedwards.net/blog/golang-response-snippets)  
