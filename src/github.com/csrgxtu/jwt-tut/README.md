@@ -1,6 +1,11 @@
 ##An Simple JWT(Json Web Token) Tutorial In Golang.
 
 ### Usage
+before testing jwt, u need 2 start simple http server  
+```bash
+go run server.go
+```
+
 first, auth and get the Token  
 Request:
 ```bash
