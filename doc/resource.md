@@ -31,3 +31,4 @@ git remote set-url origin git@github.com:username/repo.git
 [jwt doc](https://godoc.org/github.com/dgrijalva/jwt-go#example-Parse)  
 [golang http json](http://www.alexedwards.net/blog/golang-response-snippets)  
 [How to set the authorization header using curl](http://stackoverflow.com/questions/3044315/how-to-set-the-authorization-header-using-curl)
+[Build a RESTful API with Martini](http://0value.com/build-a-restful-API-with-Martini)  
