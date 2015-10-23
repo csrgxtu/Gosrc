@@ -1,0 +1,5 @@
+echo {\"foo\":\"bar\"} | ./app -key demo.rsa -alg RS256 -sign - | ./app -key demo.rsa.pub -verify -
+
+echo {\"foo\":\"bar\"} | ./app -key demo.rsa -alg RS256 -sign -
+
+echo eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIifQ.fN4YfLHqfsRdJLIVSaOb0MrGULYSJSUmTyV-zIcB2S2E0EtiHiQcDDoNHCp0Lp8SMfPeVxuRJPGq_viC99KX3shSibCtmh2MlpgQvcb8Ug0yEE8ofeMWd1WH46LSF1dY-b6zHAD4JkpCEr6DlG9q1qKW84xNDLol9X-DXgONxnQ | ./app -key demo.rsa.pub -verify -
