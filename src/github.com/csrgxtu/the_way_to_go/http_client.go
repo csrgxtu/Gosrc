@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	if len(s.Args) != 2 {
+	if len(os.Args) != 2 {
 		fmt.Fprintf(os.Stderr, "Usage: %s host:port ", os.Args[0])
 		os.Exit(1)
 	}
