@@ -6,7 +6,6 @@ import (
 	"github.com/martini-contrib/render"
 	"github.com/martini-contrib/sessions"
 	goauth2 "golang.org/x/oauth2"
-	// wechat "github.com/chanxuehong/wechat/oauth2"
 
 	"oauth/controllers"
 )
@@ -24,11 +23,19 @@ func main() {
 	//     RedirectURL:  "http://localhost:3000/apis",
 	//   },
 	// ))
-	m.Use(oauth2.Github(
+	// m.Use(oauth2.Github(
+	// 	&goauth2.Config{
+	// 		ClientID:     "855acacb3bfe44dd929b",
+	// 		ClientSecret: "da676b7e863cf493f9fcac0eb856cbb2074c5806",
+	// 		RedirectURL:  "http://localhost:3000/apis",
+	// 	},
+	// ))
+	m.Use(oauth2.WeChat(
 		&goauth2.Config{
-			ClientID:     "855acacb3bfe44dd929b",
-			ClientSecret: "da676b7e863cf493f9fcac0eb856cbb2074c5806",
-			RedirectURL:  "http://localhost:3000/apis",
+			ClientID: "wxa3b6a8fc961fef35",
+			ClientSecret: "6790ebc1a1cd60b5f5d2c5bfc0bf4391",
+			Scopes: []string{"snsapi_login"},
+			RedirectURL: "http://dev.beautifulreading.com",
 		},
 	))
 
