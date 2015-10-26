@@ -4,3 +4,4 @@
 [Github OAuth API](https://developer.github.com/v3/oauth/)  
 [Allows your Martini application to support user login via an OAuth 2.0 backend.](https://github.com/martini-contrib/oauth2)  
 [wechat oauth2 example](https://gowalker.org/github.com/curvesoft/wechat/oauth2)  
+[网站应用微信登录开发指南](https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list&t=resource/res_list&verify=1&id=open1419316505&token=&lang=zh_CN)  
