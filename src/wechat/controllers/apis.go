@@ -11,3 +11,9 @@ func Create(r render.Render) {
 
   r.JSON(200, rt)
 }
+
+func Welcome(r render.Render) {
+  var rt models.Result
+
+  r.JSON(200, rt)
+}

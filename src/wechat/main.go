@@ -13,6 +13,7 @@ func main() {
   m.Use(render.Renderer())
 
   m.Get("/apis", controllers.Create)
+  m.Get("/", controllers.Welcome)
 
   m.Run()
 }
