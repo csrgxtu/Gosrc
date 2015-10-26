@@ -3,3 +3,4 @@
 [第三方登录](https://github.com/LearnShare/blog/blob/master/posts/third-party-logging.md)  
 [Github OAuth API](https://developer.github.com/v3/oauth/)  
 [Allows your Martini application to support user login via an OAuth 2.0 backend.](https://github.com/martini-contrib/oauth2)  
+[wechat oauth2 example](https://gowalker.org/github.com/curvesoft/wechat/oauth2)  

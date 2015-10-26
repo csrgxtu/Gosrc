@@ -1,13 +1,12 @@
 package main
 
 import (
-	//"fmt"
-
 	"github.com/go-martini/martini"
 	"github.com/martini-contrib/oauth2"
 	"github.com/martini-contrib/render"
 	"github.com/martini-contrib/sessions"
 	goauth2 "golang.org/x/oauth2"
+	// wechat "github.com/chanxuehong/wechat/oauth2"
 
 	"oauth/controllers"
 )
@@ -39,5 +38,6 @@ func main() {
 		return tokens.Access()
 	})
 
-	m.Run()
+	// m.Run()
+	m.RunOnAddr(":3002")
 }
