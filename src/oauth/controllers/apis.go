@@ -3,7 +3,7 @@ package controllers
 import (
   "github.com/martini-contrib/render"
 
-  "wechat/models"
+  "oauth/models"
 )
 
 func Create(r render.Render) {
