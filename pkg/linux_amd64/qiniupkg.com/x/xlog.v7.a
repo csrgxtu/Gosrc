@@ -1,0 +1,332 @@
+!<arch>
+__.PKGDEF       0           0     0     644     12061     `
+go object linux amd64 go1.5.1 X:none
+build id "fee19a71e308a3025085056bfae1a5ac3bdcdccb"
+
+$$
+package xlog
+	import runtime "runtime"
+	import fmt "fmt"
+	import io "io"
+	import os "os"
+	import log "qiniupkg.com/x/log.v7"
+	import reqid "qiniupkg.com/x/reqid.v7"
+	import context "golang.org/x/net/context"
+	const @"".Ldate = 0x1
+	const @"".Ltime = 0x2
+	const @"".Lmicroseconds = 0x4
+	const @"".Llongfile = 0x8
+	const @"".Lshortfile = 0x10
+	const @"".Lmodule = 0x20
+	const @"".Llevel = 0x40
+	const @"".LstdFlags = 0x7
+	const @"".Ldefault = 0x77
+	const @"".Ldebug = 0x0
+	const @"".Linfo = 0x1
+	const @"".Lwarn = 0x2
+	const @"".Lerror = 0x3
+	const @"".Lpanic = 0x4
+	const @"".Lfatal = 0x5
+	type @"".Logger struct { ReqId string }
+	func (@"".xlogÂ·1 *@"".Logger "esc:0x9") Debug (@"".vÂ·2 ...interface {} "esc:0x9")
+	func (@"".xlogÂ·1 *@"".Logger "esc:0x9") Debugf (@"".formatÂ·2 string "esc:0x9", @"".vÂ·3 ...interface {} "esc:0x9")
+	func (@"".xlogÂ·1 *@"".Logger "esc:0x9") Error (@"".vÂ·2 ...interface {} "esc:0x9")
+	func (@"".xlogÂ·1 *@"".Logger "esc:0x9") Errorf (@"".formatÂ·2 string "esc:0x9", @"".vÂ·3 ...interface {} "esc:0x9")
+	func (@"".xlogÂ·1 *@"".Logger "esc:0x9") Fatal (@"".vÂ·2 ...interface {} "esc:0x9")
+	func (@"".xlogÂ·1 *@"".Logger "esc:0x9") Fatalf (@"".formatÂ·2 string "esc:0x9", @"".vÂ·3 ...interface {} "esc:0x9")
+	func (@"".xlogÂ·1 *@"".Logger "esc:0x9") Fatalln (@"".vÂ·2 ...interface {} "esc:0x9")
+	func (@"".xlogÂ·1 *@"".Logger "esc:0x9") Info (@"".vÂ·2 ...interface {} "esc:0x9")
+	func (@"".xlogÂ·1 *@"".Logger "esc:0x9") Infof (@"".formatÂ·2 string "esc:0x9", @"".vÂ·3 ...interface {} "esc:0x9")
+	func (@"".xlogÂ·1 *@"".Logger "esc:0x9") Panic (@"".vÂ·2 ...interface {} "esc:0x9")
+	func (@"".xlogÂ·1 *@"".Logger "esc:0x9") Panicf (@"".formatÂ·2 string "esc:0x9", @"".vÂ·3 ...interface {} "esc:0x9")
+	func (@"".xlogÂ·1 *@"".Logger "esc:0x9") Panicln (@"".vÂ·2 ...interface {} "esc:0x9")
+	func (@"".xlogÂ·1 *@"".Logger "esc:0x9") Print (@"".vÂ·2 ...interface {} "esc:0x9")
+	func (@"".xlogÂ·1 *@"".Logger "esc:0x9") Printf (@"".formatÂ·2 string "esc:0x9", @"".vÂ·3 ...interface {} "esc:0x9")
+	func (@"".xlogÂ·1 *@"".Logger "esc:0x9") Println (@"".vÂ·2 ...interface {} "esc:0x9")
+	func (@"".xlogÂ·1 *@"".Logger "esc:0x9") SingleStack (@"".vÂ·2 ...interface {} "esc:0x9")
+	func (@"".xlogÂ·2 *@"".Logger "esc:0x1") Spawn (@"".childÂ·3 string "esc:0x1") (? *@"".Logger) { return (&@"".Logger{ ReqId:@"".xlogÂ·2.ReqId + "." + @"".childÂ·3 }) }
+	func (@"".xlogÂ·1 *@"".Logger "esc:0x9") Stack (@"".vÂ·2 ...interface {} "esc:0x9")
+	func (@"".xlogÂ·1 *@"".Logger "esc:0x9") Warn (@"".vÂ·2 ...interface {} "esc:0x9")
+	func (@"".xlogÂ·1 *@"".Logger "esc:0x9") Warnf (@"".formatÂ·2 string "esc:0x9", @"".vÂ·3 ...interface {} "esc:0x9")
+	func @"".New (@"".reqIdÂ·2 string) (? *@"".Logger) { return (&@"".Logger{ ReqId:@"".reqIdÂ·2 }) }
+	import time "time" // indirect
+	type @"time".zone struct { @"time".name string; @"time".offset int; @"time".isDST bool }
+	type @"time".zoneTrans struct { @"time".when int64; @"time".index uint8; @"time".isstd bool; @"time".isutc bool }
+	type @"time".Location struct { @"time".name string; @"time".zone []@"time".zone; @"time".tx []@"time".zoneTrans; @"time".cacheStart int64; @"time".cacheEnd int64; @"time".cacheZone *@"time".zone }
+	func (@"time".lÂ·2 *@"time".Location "esc:0x22") String () (? string)
+	func (@"time".lÂ·2 *@"time".Location "esc:0x1") @"time".firstZoneUsed () (? bool)
+	func (@"time".lÂ·2 *@"time".Location "esc:0x12") @"time".get () (? *@"time".Location)
+	func (@"time".lÂ·6 *@"time".Location "esc:0x32") @"time".lookup (@"time".secÂ·7 int64) (@"time".nameÂ·1 string, @"time".offsetÂ·2 int, @"time".isDSTÂ·3 bool, @"time".startÂ·4 int64, @"time".endÂ·5 int64)
+	func (@"time".lÂ·2 *@"time".Location "esc:0x1") @"time".lookupFirstZone () (? int)
+	func (@"time".lÂ·4 *@"time".Location "esc:0x1") @"time".lookupName (@"time".nameÂ·5 string "esc:0x1", @"time".unixÂ·6 int64) (@"time".offsetÂ·1 int, @"time".isDSTÂ·2 bool, @"time".okÂ·3 bool)
+	type @"time".Duration int64
+	func (@"time".dÂ·2 @"time".Duration) Hours () (? float64) { var @"time".hourÂ·3 @"time".Duration; ; @"time".hourÂ·3 = @"time".dÂ·2 / @"time".Duration(0x34630b8a000); var @"time".nsecÂ·4 @"time".Duration; ; @"time".nsecÂ·4 = @"time".dÂ·2 % @"time".Duration(0x34630b8a000); return float64(@"time".hourÂ·3) + float64(@"time".nsecÂ·4) * 8190022623310637111963488201822504381538623676021880892417778544696899264837610290203272971060556344039023584360473938041055625214280336402169897364226048p-553 }
+	func (@"time".dÂ·2 @"time".Duration) Minutes () (? float64) { var @"time".minÂ·3 @"time".Duration; ; @"time".minÂ·3 = @"time".dÂ·2 / @"time".Duration(0xdf8475800); var @"time".nsecÂ·4 @"time".Duration; ; @"time".nsecÂ·4 = @"time".dÂ·2 % @"time".Duration(0xdf8475800); return float64(@"time".minÂ·3) + float64(@"time".nsecÂ·4) * 7678146209353722106395056769533233877065564876941352542109479049699919628723768656821910653339403201031675627614471533358284117434246264392176261853609984p-547 }
+	func (@"time".dÂ·2 @"time".Duration) Nanoseconds () (? int64) { return int64(@"time".dÂ·2) }
+	func (@"time".dÂ·2 @"time".Duration) Seconds () (? float64) { var @"time".secÂ·3 @"time".Duration; ; @"time".secÂ·3 = @"time".dÂ·2 / @"time".Duration(0x3b9aca00); var @"time".nsecÂ·4 @"time".Duration; ; @"time".nsecÂ·4 = @"time".dÂ·2 % @"time".Duration(0x3b9aca00); return float64(@"time".secÂ·3) + float64(@"time".nsecÂ·4) * 7198262071269114660816079141112770740375861891461678802759824945047098083990024106014198994535558872472104883612039846078596891298747423852523262413111296p-541 }
+	func (@"time".dÂ·2 @"time".Duration) String () (? string)
+	type @"time".Month int
+	func (@"time".mÂ·2 @"time".Month) String () (? string) { return @"time".months[@"time".mÂ·2 - @"time".Month(0x1)] }
+	type @"time".Weekday int
+	func (@"time".dÂ·2 @"time".Weekday) String () (? string) { return @"time".days[@"time".dÂ·2] }
+	type @"time".Time struct { @"time".sec int64; @"time".nsec int32; @"time".loc *@"time".Location }
+	func (@"time".tÂ·2 @"time".Time "esc:0x12") Add (@"time".dÂ·3 @"time".Duration) (? @"time".Time) { @"time".tÂ·2.@"time".sec += int64(@"time".dÂ·3 / @"time".Duration(0x3b9aca00)); var @"time".nsecÂ·4 int32; ; @"time".nsecÂ·4 = int32(@"time".tÂ·2.@"time".nsec) + int32(@"time".dÂ·3 % @"time".Duration(0x3b9aca00)); if @"time".nsecÂ·4 >= 0x3b9aca00 { @"time".tÂ·2.@"time".sec++; @"time".nsecÂ·4 -= 0x3b9aca00 } else { if @"time".nsecÂ·4 < 0x0 { @"time".tÂ·2.@"time".sec--; @"time".nsecÂ·4 += 0x3b9aca00 } }; @"time".tÂ·2.@"time".nsec = @"time".nsecÂ·4; return @"time".tÂ·2 }
+	func (@"time".tÂ·2 @"time".Time "esc:0x12") AddDate (@"time".yearsÂ·3 int, @"time".monthsÂ·4 int, @"time".daysÂ·5 int) (? @"time".Time)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") After (@"time".uÂ·3 @"time".Time "esc:0x1") (? bool) { return @"time".tÂ·2.@"time".sec > @"time".uÂ·3.@"time".sec || @"time".tÂ·2.@"time".sec == @"time".uÂ·3.@"time".sec && @"time".tÂ·2.@"time".nsec > @"time".uÂ·3.@"time".nsec }
+	func (@"time".tÂ·2 @"time".Time "esc:0x9") AppendFormat (@"time".bÂ·3 []byte "esc:0x1a", @"time".layoutÂ·4 string "esc:0x9") (? []byte)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") Before (@"time".uÂ·3 @"time".Time "esc:0x1") (? bool) { return @"time".tÂ·2.@"time".sec < @"time".uÂ·3.@"time".sec || @"time".tÂ·2.@"time".sec == @"time".uÂ·3.@"time".sec && @"time".tÂ·2.@"time".nsec < @"time".uÂ·3.@"time".nsec }
+	func (@"time".tÂ·4 @"time".Time "esc:0x1") Clock () (@"time".hourÂ·1 int, @"time".minÂ·2 int, @"time".secÂ·3 int)
+	func (@"time".tÂ·4 @"time".Time "esc:0x1") Date () (@"time".yearÂ·1 int, @"time".monthÂ·2 @"time".Month, @"time".dayÂ·3 int)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") Day () (? int)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") Equal (@"time".uÂ·3 @"time".Time "esc:0x1") (? bool) { return @"time".tÂ·2.@"time".sec == @"time".uÂ·3.@"time".sec && @"time".tÂ·2.@"time".nsec == @"time".uÂ·3.@"time".nsec }
+	func (@"time".tÂ·2 @"time".Time "esc:0x9") Format (@"time".layoutÂ·3 string "esc:0x9") (? string)
+	func (@"time".tÂ·2 *@"time".Time "esc:0x1") GobDecode (@"time".dataÂ·3 []byte "esc:0x1") (? error)
+	func (@"time".tÂ·3 @"time".Time "esc:0x1") GobEncode () (? []byte, ? error)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") Hour () (? int)
+	func (@"time".tÂ·3 @"time".Time "esc:0x1") ISOWeek () (@"time".yearÂ·1 int, @"time".weekÂ·2 int)
+	func (@"time".tÂ·2 @"time".Time "esc:0x12") In (@"time".locÂ·3 *@"time".Location "esc:0x12") (? @"time".Time)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") IsZero () (? bool) { return @"time".tÂ·2.@"time".sec == 0x0 && @"time".tÂ·2.@"time".nsec == 0x0 }
+	func (@"time".tÂ·2 @"time".Time "esc:0x12") Local () (? @"time".Time) { @"time".tÂ·2.@"time".loc = @"time".Local; return @"time".tÂ·2 }
+	func (@"time".tÂ·2 @"time".Time "esc:0x12") Location () (? *@"time".Location) { var @"time".lÂ·3 *@"time".Location; ; @"time".lÂ·3 = @"time".tÂ·2.@"time".loc; if @"time".lÂ·3 == nil { @"time".lÂ·3 = @"time".UTC }; return @"time".lÂ·3 }
+	func (@"time".tÂ·3 @"time".Time "esc:0x1") MarshalBinary () (? []byte, ? error)
+	func (@"time".tÂ·3 @"time".Time "esc:0x9") MarshalJSON () (? []byte, ? error)
+	func (@"time".tÂ·3 @"time".Time "esc:0x9") MarshalText () (? []byte, ? error)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") Minute () (? int)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") Month () (? @"time".Month)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") Nanosecond () (? int) { return int(@"time".tÂ·2.@"time".nsec) }
+	func (@"time".tÂ·2 @"time".Time "esc:0x12") Round (@"time".dÂ·3 @"time".Duration) (? @"time".Time)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") Second () (? int)
+	func (@"time".tÂ·2 @"time".Time "esc:0x9") String () (? string)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") Sub (@"time".uÂ·3 @"time".Time "esc:0x1") (? @"time".Duration)
+	func (@"time".tÂ·2 @"time".Time "esc:0x12") Truncate (@"time".dÂ·3 @"time".Duration) (? @"time".Time)
+	func (@"time".tÂ·2 @"time".Time "esc:0x12") UTC () (? @"time".Time) { @"time".tÂ·2.@"time".loc = @"time".UTC; return @"time".tÂ·2 }
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") Unix () (? int64) { return @"time".tÂ·2.@"time".sec + -0xe7791f700 }
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") UnixNano () (? int64) { return (@"time".tÂ·2.@"time".sec + -0xe7791f700) * 0x3b9aca00 + int64(@"time".tÂ·2.@"time".nsec) }
+	func (@"time".tÂ·2 *@"time".Time "esc:0x1") UnmarshalBinary (@"time".dataÂ·3 []byte "esc:0x1") (? error)
+	func (@"time".tÂ·2 *@"time".Time "esc:0x1") UnmarshalJSON (@"time".dataÂ·3 []byte "esc:0x1") (@"time".errÂ·1 error)
+	func (@"time".tÂ·2 *@"time".Time "esc:0x1") UnmarshalText (@"time".dataÂ·3 []byte "esc:0x1") (@"time".errÂ·1 error)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") Weekday () (? @"time".Weekday)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") Year () (? int)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") YearDay () (? int)
+	func (@"time".tÂ·3 @"time".Time "esc:0x32") Zone () (@"time".nameÂ·1 string, @"time".offsetÂ·2 int)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") @"time".abs () (? uint64)
+	func (@"time".tÂ·5 @"time".Time "esc:0x1") @"time".date (@"time".fullÂ·6 bool) (@"time".yearÂ·1 int, @"time".monthÂ·2 @"time".Month, @"time".dayÂ·3 int, @"time".ydayÂ·4 int)
+	func (@"time".tÂ·4 @"time".Time "esc:0x32") @"time".locabs () (@"time".nameÂ·1 string, @"time".offsetÂ·2 int, @"time".absÂ·3 uint64)
+	type @"golang.org/x/net/context".Context interface { Deadline() (@"golang.org/x/net/context".deadline @"time".Time, @"golang.org/x/net/context".ok bool); Done() (? <-chan struct {}); Err() (? error); Value(@"golang.org/x/net/context".key interface {}) (? interface {}) }
+	func @"".NewWith (@"".ctxÂ·2 @"golang.org/x/net/context".Context) (? *@"".Logger)
+	type @"io".Writer interface { Write(@"io".p []byte) (@"io".n int, @"io".err error) }
+	func @"".SetOutput (@"".wÂ·1 @"io".Writer)
+	func @"".SetFlags (@"".flagÂ·1 int)
+	func @"".SetOutputLevel (@"".lvlÂ·1 int)
+	func @"".init ()
+	var @"time".months [12]string
+	var @"time".days [7]string
+	var @"time".Local *@"time".Location
+	var @"time".UTC *@"time".Location
+
+$$
+ _go_.o          0           0     0     644     45878     `
+go object linux amd64 go1.5.1 X:none
+
+!
+  go13ld
+fmt.aio.aos.aruntime.a.qiniupkg.com/x/log.v7.a2qiniupkg.com/x/reqid.v7.a4golang.org/x/net/context.a ş"".New  à  ÚdH‹%    H;avWHƒìH    H‰$è    H‹D$H‰D$H‹l$(H‰hH‹l$ €=     uH‰(H‰D$0HƒÄÃH‰$H‰l$è    H‹D$ëáè    ë“
+      ,  type."".Logger   >
+  "runtime.newobject   z 6runtime.writeBarrierEnabled   ¶
+  .runtime.writebarrierptr   Î
+  0runtime.morestack_noctxt   00  "".autotmp_0000 type.*"".Logger "".~r1  type.*"".Logger "".reqId  type.string 0=/0 p XS
+  < TgclocalsÂ·41a13ac73c712c01973b8fe23f62d694 TgclocalsÂ·0c8aa8e80191a30eac23f1a218103f16   ~/home/archer/Documents/Gosrc/src/qiniupkg.com/x/xlog.v7/xlog.goş"".NewWith  à  ÖdH‹%    HD$øH;A†‰  Hìˆ   1ÀH‰D$PH‰D$XH‹œ$   H‰$H‹œ$˜   H‰\$è    H‹\$H‰\$0H‹\$H‰\$8¶\$ €û …¿   H    H‰\$`HÇD$h%   1ÛH‰\$PH‰\$XH\$PHƒû „ÿ   HÇD$x   HÇ„$€      H‰\$pH    H‰$H\$`H‰\$HÇD$    è    H‹L$H‹D$ H‹\$pH‰L$@H‰H‰D$H€=     …‚   H‰CH‹\$pH‰$H‹\$xH‰\$H‹œ$€   H‰\$è    H    H‰$è    H‹D$H‰D$(H‹l$8H‰hH‹l$0€=     uH‰(H‰„$    HÄˆ   ÃH‰$H‰l$è    H‹D$(ëÛLCL‰$H‰D$è    ékÿÿÿ‰éúşÿÿè    éUşÿÿ
+      Š
+  Jqiniupkg.com/x/reqid%2ev7.FromContext   Ü  bgo.string."xlog.New: reqid isn't find in context"   ğ  type.string   ¨
+  runtime.convT2E   ì 6runtime.writeBarrierEnabled   Ì
+  :qiniupkg.com/x/log%2ev7.Debug   Ú  type."".Logger   ì
+  "runtime.newobject   ¨ 6runtime.writeBarrierEnabled   ğ
+  .runtime.writebarrierptr   ¢
+  .runtime.writebarrierptr   Ä
+  0runtime.morestack_noctxt   0  "".autotmp_0007 ¿type.*"".Logger "".autotmp_0006 "type.interface {} "".autotmp_0005 o(type.[1]interface {} "".autotmp_0002 /&type.[]interface {} "".autotmp_0001 Otype.string "".reqId ¯type.string "".~r1  type.*"".Logger "".ctx  Jtype.golang.org/x/net/context.Context ÎB °  b+7	¿Y   DRB  TgclocalsÂ·bbe2f308595eed0631fb6c42f0ddbda2 TgclocalsÂ·a6aa5fa31cf79a6e5fbaf02b2805987e   ~/home/archer/Documents/Gosrc/src/qiniupkg.com/x/xlog.v7/xlog.goş$"".(*Logger).Spawn  À  ¼dH‹%    H;a†Á   Hƒì`H    H‰$è    H‹\$H‰\$HHÇ$    H‹t$hH|$H‹H‰H‹NH‰OH    H‰\$HÇD$    H‹\$pH‰\$(H‹\$xH‰\$0è    H‹L$8H‹D$@H‹\$HHƒû t<H‰D$XH‰CH‰L$P€=     uH‰H‹\$HH‰œ$€   HƒÄ`ÃH‰$H‰L$è    ëŞ‰ëÀè    é"ÿÿÿ
+      4  type."".Logger   F
+  "runtime.newobject   ¨  go.string."."   ö
+  *runtime.concatstring3   È 6runtime.writeBarrierEnabled   ”
+  .runtime.writebarrierptr   ª
+  0runtime.morestack_noctxt   @À  "".autotmp_0008 /type.*"".Logger "".~r1 0type.*"".Logger "".child type.string "".xlog  type.*"".Logger À¨¿À  à t½  "Xf TgclocalsÂ·aefd16b155593f6f07980a05b297ad1f TgclocalsÂ·2c033e7f4f4a74cc7e9f368d1fec9f60   ~/home/archer/Documents/Gosrc/src/qiniupkg.com/x/xlog.v7/xlog.goş$"".(*Logger).Print  À  ÀdH‹%    H;a†ƒ   HƒìXH‹\$hH‰$H‹\$pH‰\$H‹\$xH‰\$è    H‹T$H‹D$ H‹    H‰$H‹t$`H|$H‹H‰H‹NH‰OHÇD$   HÇD$    H‰T$HH‰T$(H‰D$PH‰D$0è    HƒÄXÃè    é`ÿÿÿ
+
+      j
+  fmt.Sprint   Œ  6qiniupkg.com/x/log%2ev7.Std   š
+  Pqiniupkg.com/x/log%2ev7.(*Logger).Output   ®
+  0runtime.morestack_noctxt   @°  "".autotmp_0010 type.string "".v &type.[]interface {} "".xlog  type.*"".Logger °~¯°
+   †z
+ 
+ 4l TgclocalsÂ·0ebb2d1da58c1b4224bf5a7b370d7578 TgclocalsÂ·23e8278e2b69a3a75fa59b23c49ed6ad   ~/home/archer/Documents/Gosrc/src/qiniupkg.com/x/xlog.v7/xlog.goş&"".(*Logger).Printf  €  ôdH‹%    H;a†   HƒìXH‹\$hH‰$H‹\$pH‰\$H‹\$xH‰\$H‹œ$€   H‰\$H‹œ$ˆ   H‰\$ è    H‹T$(H‹D$0H‹    H‰$H‹t$`H|$H‹H‰H‹NH‰OHÇD$   HÇD$    H‰T$HH‰T$(H‰D$PH‰D$0è    HƒÄXÃè    éFÿÿÿ
+
+      
+  fmt.Sprintf   À  6qiniupkg.com/x/log%2ev7.Std   Î
+  Pqiniupkg.com/x/log%2ev7.(*Logger).Output   â
+  0runtime.morestack_noctxt   `°  "".autotmp_0011 type.string "".v 0&type.[]interface {} "".format type.string "".xlog  type.*"".Logger °˜¯° À ’” 
+ Nr TgclocalsÂ·c6134a2ac139b68c0737f8b03170e2ac TgclocalsÂ·23e8278e2b69a3a75fa59b23c49ed6ad   ~/home/archer/Documents/Gosrc/src/qiniupkg.com/x/xlog.v7/xlog.goş("".(*Logger).Println  À  ÀdH‹%    H;a†ƒ   HƒìXH‹\$hH‰$H‹\$pH‰\$H‹\$xH‰\$è    H‹T$H‹D$ H‹    H‰$H‹t$`H|$H‹H‰H‹NH‰OHÇD$   HÇD$    H‰T$HH‰T$(H‰D$PH‰D$0è    HƒÄXÃè    é`ÿÿÿ
+
+      j
+  fmt.Sprintln   Œ  6qiniupkg.com/x/log%2ev7.Std   š
+  Pqiniupkg.com/x/log%2ev7.(*Logger).Output   ®
+  0runtime.morestack_noctxt   @°  "".autotmp_0012 type.string "".v &type.[]interface {} "".xlog  type.*"".Logger °~¯°
+   z
+ 
+ 4l TgclocalsÂ·0ebb2d1da58c1b4224bf5a7b370d7578 TgclocalsÂ·23e8278e2b69a3a75fa59b23c49ed6ad   ~/home/archer/Documents/Gosrc/src/qiniupkg.com/x/xlog.v7/xlog.goş&"".(*Logger).Debugf      dH‹%    H;a†³   HƒìXH‹-    H‹] Hƒû ~HƒÄXÃH‹\$hH‰$H‹\$pH‰\$H‹\$xH‰\$H‹œ$€   H‰\$H‹œ$ˆ   H‰\$ è    H‹T$(H‹D$0H‹    H‰$H‹t$`H|$H‹H‰H‹NH‰OHÇD$    HÇD$    H‰T$HH‰T$(H‰D$PH‰D$0è    HƒÄXÃè    é0ÿÿÿ
+      4  6qiniupkg.com/x/log%2ev7.Std   Ê
+  fmt.Sprintf   ì  6qiniupkg.com/x/log%2ev7.Std   ú
+  Pqiniupkg.com/x/log%2ev7.(*Logger).Output   
+  0runtime.morestack_noctxt   `°  "".autotmp_0013 type.string "".v 0&type.[]interface {} "".format type.string "".xlog  type.*"".Logger &°¯°˜¯°
+ Ğ ª”	
+ 
+ dl TgclocalsÂ·c6134a2ac139b68c0737f8b03170e2ac TgclocalsÂ·23e8278e2b69a3a75fa59b23c49ed6ad   ~/home/archer/Documents/Gosrc/src/qiniupkg.com/x/xlog.v7/xlog.goş$"".(*Logger).Debug  €  ìdH‹%    H;a†™   HƒìXH‹-    H‹] Hƒû ~HƒÄXÃH‹\$hH‰$H‹\$pH‰\$H‹\$xH‰\$è    H‹T$H‹D$ H‹    H‰$H‹t$`H|$H‹H‰H‹NH‰OHÇD$    HÇD$    H‰T$HH‰T$(H‰D$PH‰D$0è    HƒÄXÃè    éJÿÿÿ
+      4  6qiniupkg.com/x/log%2ev7.Std   –
+  fmt.Sprintln   ¸  6qiniupkg.com/x/log%2ev7.Std   Æ
+  Pqiniupkg.com/x/log%2ev7.(*Logger).Output   Ú
+  0runtime.morestack_noctxt   @°  "".autotmp_0014 type.string "".v &type.[]interface {} "".xlog  type.*"".Logger $°¯°~¯° À ¸z	 
+ Jv TgclocalsÂ·0ebb2d1da58c1b4224bf5a7b370d7578 TgclocalsÂ·23e8278e2b69a3a75fa59b23c49ed6ad   ~/home/archer/Documents/Gosrc/src/qiniupkg.com/x/xlog.v7/xlog.goş$"".(*Logger).Infof      dH‹%    H;a†³   HƒìXH‹-    H‹] Hƒû~HƒÄXÃH‹\$hH‰$H‹\$pH‰\$H‹\$xH‰\$H‹œ$€   H‰\$H‹œ$ˆ   H‰\$ è    H‹T$(H‹D$0H‹    H‰$H‹t$`H|$H‹H‰H‹NH‰OHÇD$   HÇD$    H‰T$HH‰T$(H‰D$PH‰D$0è    HƒÄXÃè    é0ÿÿÿ
+      4  6qiniupkg.com/x/log%2ev7.Std   Ê
+  fmt.Sprintf   ì  6qiniupkg.com/x/log%2ev7.Std   ú
+  Pqiniupkg.com/x/log%2ev7.(*Logger).Output   
+  0runtime.morestack_noctxt   `°  "".autotmp_0015 type.string "".v 0&type.[]interface {} "".format type.string "".xlog  type.*"".Logger &°¯°˜¯°
+ Ğ Ê”	
+ 
+ dl TgclocalsÂ·c6134a2ac139b68c0737f8b03170e2ac TgclocalsÂ·23e8278e2b69a3a75fa59b23c49ed6ad   ~/home/archer/Documents/Gosrc/src/qiniupkg.com/x/xlog.v7/xlog.goş""".(*Logger).Info  €  ìdH‹%    H;a†™   HƒìXH‹-    H‹] Hƒû~HƒÄXÃH‹\$hH‰$H‹\$pH‰\$H‹\$xH‰\$è    H‹T$H‹D$ H‹    H‰$H‹t$`H|$H‹H‰H‹NH‰OHÇD$   HÇD$    H‰T$HH‰T$(H‰D$PH‰D$0è    HƒÄXÃè    éJÿÿÿ
+      4  6qiniupkg.com/x/log%2ev7.Std   –
+  fmt.Sprintln   ¸  6qiniupkg.com/x/log%2ev7.Std   Æ
+  Pqiniupkg.com/x/log%2ev7.(*Logger).Output   Ú
+  0runtime.morestack_noctxt   @°  "".autotmp_0016 type.string "".v &type.[]interface {} "".xlog  type.*"".Logger $°¯°~¯° À Øz	 
+ Jv TgclocalsÂ·0ebb2d1da58c1b4224bf5a7b370d7578 TgclocalsÂ·23e8278e2b69a3a75fa59b23c49ed6ad   ~/home/archer/Documents/Gosrc/src/qiniupkg.com/x/xlog.v7/xlog.goş$"".(*Logger).Warnf  €  ôdH‹%    H;a†   HƒìXH‹\$hH‰$H‹\$pH‰\$H‹\$xH‰\$H‹œ$€   H‰\$H‹œ$ˆ   H‰\$ è    H‹T$(H‹D$0H‹    H‰$H‹t$`H|$H‹H‰H‹NH‰OHÇD$   HÇD$    H‰T$HH‰T$(H‰D$PH‰D$0è    HƒÄXÃè    éFÿÿÿ
+
+      
+  fmt.Sprintf   À  6qiniupkg.com/x/log%2ev7.Std   Î
+  Pqiniupkg.com/x/log%2ev7.(*Logger).Output   â
+  0runtime.morestack_noctxt   `°  "".autotmp_0017 type.string "".v 0&type.[]interface {} "".format type.string "".xlog  type.*"".Logger °˜¯° À ê” 
+ Nr TgclocalsÂ·c6134a2ac139b68c0737f8b03170e2ac TgclocalsÂ·23e8278e2b69a3a75fa59b23c49ed6ad   ~/home/archer/Documents/Gosrc/src/qiniupkg.com/x/xlog.v7/xlog.goş""".(*Logger).Warn  À  ÀdH‹%    H;a†ƒ   HƒìXH‹\$hH‰$H‹\$pH‰\$H‹\$xH‰\$è    H‹T$H‹D$ H‹    H‰$H‹t$`H|$H‹H‰H‹NH‰OHÇD$   HÇD$    H‰T$HH‰T$(H‰D$PH‰D$0è    HƒÄXÃè    é`ÿÿÿ
+
+      j
+  fmt.Sprintln   Œ  6qiniupkg.com/x/log%2ev7.Std   š
+  Pqiniupkg.com/x/log%2ev7.(*Logger).Output   ®
+  0runtime.morestack_noctxt   @°  "".autotmp_0018 type.string "".v &type.[]interface {} "".xlog  type.*"".Logger °~¯°
+   òz
+ 
+ 4l TgclocalsÂ·0ebb2d1da58c1b4224bf5a7b370d7578 TgclocalsÂ·23e8278e2b69a3a75fa59b23c49ed6ad   ~/home/archer/Documents/Gosrc/src/qiniupkg.com/x/xlog.v7/xlog.goş&"".(*Logger).Errorf  €  ôdH‹%    H;a†   HƒìXH‹\$hH‰$H‹\$pH‰\$H‹\$xH‰\$H‹œ$€   H‰\$H‹œ$ˆ   H‰\$ è    H‹T$(H‹D$0H‹    H‰$H‹t$`H|$H‹H‰H‹NH‰OHÇD$   HÇD$    H‰T$HH‰T$(H‰D$PH‰D$0è    HƒÄXÃè    éFÿÿÿ
+
+      
+  fmt.Sprintf   À  6qiniupkg.com/x/log%2ev7.Std   Î
+  Pqiniupkg.com/x/log%2ev7.(*Logger).Output   â
+  0runtime.morestack_noctxt   `°  "".autotmp_0019 type.string "".v 0&type.[]interface {} "".format type.string "".xlog  type.*"".Logger °˜¯° À ş” 
+ Nr TgclocalsÂ·c6134a2ac139b68c0737f8b03170e2ac TgclocalsÂ·23e8278e2b69a3a75fa59b23c49ed6ad   ~/home/archer/Documents/Gosrc/src/qiniupkg.com/x/xlog.v7/xlog.goş$"".(*Logger).Error  À  ÀdH‹%    H;a†ƒ   HƒìXH‹\$hH‰$H‹\$pH‰\$H‹\$xH‰\$è    H‹T$H‹D$ H‹    H‰$H‹t$`H|$H‹H‰H‹NH‰OHÇD$   HÇD$    H‰T$HH‰T$(H‰D$PH‰D$0è    HƒÄXÃè    é`ÿÿÿ
+
+      j
+  fmt.Sprintln   Œ  6qiniupkg.com/x/log%2ev7.Std   š
+  Pqiniupkg.com/x/log%2ev7.(*Logger).Output   ®
+  0runtime.morestack_noctxt   @°  "".autotmp_0020 type.string "".v &type.[]interface {} "".xlog  type.*"".Logger °~¯°
+   †z
+ 
+ 4l TgclocalsÂ·0ebb2d1da58c1b4224bf5a7b370d7578 TgclocalsÂ·23e8278e2b69a3a75fa59b23c49ed6ad   ~/home/archer/Documents/Gosrc/src/qiniupkg.com/x/xlog.v7/xlog.goş$"".(*Logger).Fatal  à  ÚdH‹%    H;a†   HƒìXH‹\$hH‰$H‹\$pH‰\$H‹\$xH‰\$è    H‹T$H‹D$ H‹    H‰$H‹t$`H|$H‹H‰H‹NH‰OHÇD$   HÇD$    H‰T$HH‰T$(H‰D$PH‰D$0è    HÇ$   è    HƒÄXÃè    éSÿÿÿ
+      j
+  fmt.Sprint   Œ  6qiniupkg.com/x/log%2ev7.Std   š
+  Pqiniupkg.com/x/log%2ev7.(*Logger).Output   ´
+  os.Exit   È
+  0runtime.morestack_noctxt   @°  "".autotmp_0021 type.string "".v &type.[]interface {} "".xlog  type.*"".Logger °‹¯° ° ”z 
+ 4| TgclocalsÂ·0ebb2d1da58c1b4224bf5a7b370d7578 TgclocalsÂ·23e8278e2b69a3a75fa59b23c49ed6ad   ~/home/archer/Documents/Gosrc/src/qiniupkg.com/x/xlog.v7/xlog.goş&"".(*Logger).Fatalf     dH‹%    H;a†ª   HƒìXH‹\$hH‰$H‹\$pH‰\$H‹\$xH‰\$H‹œ$€   H‰\$H‹œ$ˆ   H‰\$ è    H‹T$(H‹D$0H‹    H‰$H‹t$`H|$H‹H‰H‹NH‰OHÇD$   HÇD$    H‰T$HH‰T$(H‰D$PH‰D$0è    HÇ$   è    HƒÄXÃè    é9ÿÿÿ
+      
+  fmt.Sprintf   À  6qiniupkg.com/x/log%2ev7.Std   Î
+  Pqiniupkg.com/x/log%2ev7.(*Logger).Output   è
+  os.Exit   ü
+  0runtime.morestack_noctxt   `°  "".autotmp_0022 type.string "".v 0&type.[]interface {} "".format type.string "".xlog  type.*"".Logger °¥¯° Ğ  ”  N‚ TgclocalsÂ·c6134a2ac139b68c0737f8b03170e2ac TgclocalsÂ·23e8278e2b69a3a75fa59b23c49ed6ad   ~/home/archer/Documents/Gosrc/src/qiniupkg.com/x/xlog.v7/xlog.goş("".(*Logger).Fatalln  à  ÚdH‹%    H;a†   HƒìXH‹\$hH‰$H‹\$pH‰\$H‹\$xH‰\$è    H‹T$H‹D$ H‹    H‰$H‹t$`H|$H‹H‰H‹NH‰OHÇD$   HÇD$    H‰T$HH‰T$(H‰D$PH‰D$0è    HÇ$   è    HƒÄXÃè    éSÿÿÿ
+      j
+  fmt.Sprintln   Œ  6qiniupkg.com/x/log%2ev7.Std   š
+  Pqiniupkg.com/x/log%2ev7.(*Logger).Output   ´
+  os.Exit   È
+  0runtime.morestack_noctxt   @°  "".autotmp_0023 type.string "".v &type.[]interface {} "".xlog  type.*"".Logger °‹¯° ° ¬z 
+ 4| TgclocalsÂ·0ebb2d1da58c1b4224bf5a7b370d7578 TgclocalsÂ·23e8278e2b69a3a75fa59b23c49ed6ad   ~/home/archer/Documents/Gosrc/src/qiniupkg.com/x/xlog.v7/xlog.goş$"".(*Logger).Panic  €  èdH‹%    H;a†×   HƒìhH‹\$xH‰$H‹œ$€   H‰\$H‹œ$ˆ   H‰\$è    H‹T$H‹D$ H‹    H‰$H‹t$pH|$H‹H‰H‹NH‰OHÇD$   HÇD$    H‰T$HH‰T$(H‰D$PH‰D$0è    H‹\$HH‰\$XH‹\$PH‰\$`H    H‰$H\$XH‰\$HÇD$    è    H\$H‹H‰$H‹KH‰L$è    è    éÿÿÿ
+      v
+  fmt.Sprint   ˜  6qiniupkg.com/x/log%2ev7.Std   ¦
+  Pqiniupkg.com/x/log%2ev7.(*Logger).Output   Ü  type.string   ”
+  runtime.convT2E   È
+  runtime.gopanic   Ö
+  0runtime.morestack_noctxt   @Ğ  "".autotmp_0024 type.string "".s ?type.string "".v &type.[]interface {} "".xlog  type.*"".Logger Ğé € ¼2NS  :X77 TgclocalsÂ·14c16763214c88f6ebc22b4b638329b7 TgclocalsÂ·0f976e590c2193ea3cbcc4d997cd3f2d   ~/home/archer/Documents/Gosrc/src/qiniupkg.com/x/xlog.v7/xlog.goş&"".(*Logger).Panicf     œdH‹%    H;a†ñ   HƒìhH‹\$xH‰$H‹œ$€   H‰\$H‹œ$ˆ   H‰\$H‹œ$   H‰\$H‹œ$˜   H‰\$ è    H‹T$(H‹D$0H‹    H‰$H‹t$pH|$H‹H‰H‹NH‰OHÇD$   HÇD$    H‰T$HH‰T$(H‰D$PH‰D$0è    H‹\$HH‰\$XH‹\$PH‰\$`H    H‰$H\$XH‰\$HÇD$    è    H\$H‹H‰$H‹KH‰L$è    è    éòşÿÿ
+      ª
+  fmt.Sprintf   Ì  6qiniupkg.com/x/log%2ev7.Std   Ú
+  Pqiniupkg.com/x/log%2ev7.(*Logger).Output     type.string   È
+  runtime.convT2E   ü
+  runtime.gopanic   Š
+  0runtime.morestack_noctxt   `Ğ  
+"".autotmp_0025 type.string "".s ?type.string "".v 0&type.[]interface {} "".format type.string "".xlog  type.*"".Logger Ğù  ÊLNS  TX7- TgclocalsÂ·c850c5a2fb77dc8d291a85b90724aa4c TgclocalsÂ·0f976e590c2193ea3cbcc4d997cd3f2d   ~/home/archer/Documents/Gosrc/src/qiniupkg.com/x/xlog.v7/xlog.goş("".(*Logger).Panicln  €  èdH‹%    H;a†×   HƒìhH‹\$xH‰$H‹œ$€   H‰\$H‹œ$ˆ   H‰\$è    H‹T$H‹D$ H‹    H‰$H‹t$pH|$H‹H‰H‹NH‰OHÇD$   HÇD$    H‰T$HH‰T$(H‰D$PH‰D$0è    H‹\$HH‰\$XH‹\$PH‰\$`H    H‰$H\$XH‰\$HÇD$    è    H\$H‹H‰$H‹KH‰L$è    è    éÿÿÿ
+      v
+  fmt.Sprintln   ˜  6qiniupkg.com/x/log%2ev7.Std   ¦
+  Pqiniupkg.com/x/log%2ev7.(*Logger).Output   Ü  type.string   ”
+  runtime.convT2E   È
+  runtime.gopanic   Ö
+  0runtime.morestack_noctxt   @Ğ  "".autotmp_0026 type.string "".s ?type.string "".v &type.[]interface {} "".xlog  type.*"".Logger Ğé € Ø2NS  :X77 TgclocalsÂ·14c16763214c88f6ebc22b4b638329b7 TgclocalsÂ·0f976e590c2193ea3cbcc4d997cd3f2d   ~/home/archer/Documents/Gosrc/src/qiniupkg.com/x/xlog.v7/xlog.goş$"".(*Logger).Stack  €
+  æ	dH‹%    HD$ÈH;A†Q  Hì¸   H‹œ$È   H‰$H‹œ$Ğ   H‰\$H‹œ$Ø   H‰\$è    H‹L$H‹D$ H‰L$hH‰D$pHÇ$    H‰L$xH‰L$H‰„$€   H‰D$H    H‰\$HÇD$    è    H‹\$(H‰\$hH‹\$0H‰\$pH    H‰$HÇD$   HÇD$   è    H‹T$H‹L$ H‹D$(H‰”$ˆ   H‰$H‰Œ$   H‰L$H‰„$˜   H‰D$ÆD$è    H‹D$ H‹\$hH‰\$xH‹\$pH‰œ$€   H‹¬$˜   H9è‡)  L‹„$ˆ   H\$HH‰$L‰„$    L‰D$H‰„$¨   H‰D$H‰¬$°   H‰l$è    H\$ H|$H‹H‰H‹KH‰OHÇ$    H‹\$xH‰\$H‹œ$€   H‰\$è    H‹L$(H‹D$0H‰L$hH‰D$pHÇ$    H‰L$xH‰L$H‰„$€   H‰D$H    H‰\$HÇD$    è    H‹T$(H‹D$0H‹    H‰$H‹´$À   H|$H‹H‰H‹NH‰OHÇD$   HÇD$    H‰T$hH‰T$(H‰D$pH‰D$0è    HÄ¸   Ãè    è    éıÿÿ
+      Œ
+  fmt.Sprint   €  go.string."\n"   ¦
+  *runtime.concatstring2   Ü  type.[]uint8   ’
+  "runtime.makeslice   
+  runtime.Stack   ä
+  2runtime.slicebytetostring   Ü
+  *runtime.concatstring2   Ğ  go.string."\n"   ö
+  *runtime.concatstring2   ˜  6qiniupkg.com/x/log%2ev7.Std   ¬	
+  Pqiniupkg.com/x/log%2ev7.(*Logger).Output   Æ	
+  $runtime.panicslice   Ô	
+  0runtime.morestack_noctxt   @ğ  "".autotmp_0031 ßtype.[32]uint8 "".autotmp_0030  type.string "".autotmp_0029 /type.[]uint8 "".autotmp_0028  type.string "".autotmp_0027 type.string "".buf _type.[]uint8 "".s Ÿtype.string "".v &type.[]interface {} "".xlog  type.*"".Logger ğÂïğ € 2ä5W15«MQ	  Eƒ?j<Ó TgclocalsÂ·304f1a7ece42768e76e94191b15e0406 TgclocalsÂ·2a694b485aa8ae86a166ed10b620ccf4   ~/home/archer/Documents/Gosrc/src/qiniupkg.com/x/xlog.v7/xlog.goş0"".(*Logger).SingleStack  €
+  æ	dH‹%    HD$ÈH;A†Q  Hì¸   H‹œ$È   H‰$H‹œ$Ğ   H‰\$H‹œ$Ø   H‰\$è    H‹L$H‹D$ H‰L$hH‰D$pHÇ$    H‰L$xH‰L$H‰„$€   H‰D$H    H‰\$HÇD$    è    H‹\$(H‰\$hH‹\$0H‰\$pH    H‰$HÇD$   HÇD$   è    H‹T$H‹L$ H‹D$(H‰”$ˆ   H‰$H‰Œ$   H‰L$H‰„$˜   H‰D$ÆD$ è    H‹D$ H‹\$hH‰\$xH‹\$pH‰œ$€   H‹¬$˜   H9è‡)  L‹„$ˆ   H\$HH‰$L‰„$    L‰D$H‰„$¨   H‰D$H‰¬$°   H‰l$è    H\$ H|$H‹H‰H‹KH‰OHÇ$    H‹\$xH‰\$H‹œ$€   H‰\$è    H‹L$(H‹D$0H‰L$hH‰D$pHÇ$    H‰L$xH‰L$H‰„$€   H‰D$H    H‰\$HÇD$    è    H‹T$(H‹D$0H‹    H‰$H‹´$À   H|$H‹H‰H‹NH‰OHÇD$   HÇD$    H‰T$hH‰T$(H‰D$pH‰D$0è    HÄ¸   Ãè    è    éıÿÿ
+      Œ
+  fmt.Sprint   €  go.string."\n"   ¦
+  *runtime.concatstring2   Ü  type.[]uint8   ’
+  "runtime.makeslice   
+  runtime.Stack   ä
+  2runtime.slicebytetostring   Ü
+  *runtime.concatstring2   Ğ  go.string."\n"   ö
+  *runtime.concatstring2   ˜  6qiniupkg.com/x/log%2ev7.Std   ¬	
+  Pqiniupkg.com/x/log%2ev7.(*Logger).Output   Æ	
+  $runtime.panicslice   Ô	
+  0runtime.morestack_noctxt   @ğ  "".autotmp_0036 ßtype.[32]uint8 "".autotmp_0035  type.string "".autotmp_0034 /type.[]uint8 "".autotmp_0033  type.string "".autotmp_0032 type.string "".buf _type.[]uint8 "".s Ÿtype.string "".v &type.[]interface {} "".xlog  type.*"".Logger ğÂïğ € 2ø5W15«MQ	  Eƒ?j<Ó TgclocalsÂ·304f1a7ece42768e76e94191b15e0406 TgclocalsÂ·2a694b485aa8ae86a166ed10b620ccf4   ~/home/archer/Documents/Gosrc/src/qiniupkg.com/x/xlog.v7/xlog.goş"".SetOutput  €  ndH‹%    H;av!HƒìH‹\$H‰$H‹\$ H‰\$è    HƒÄÃè    ëÉ
+      N
+  Bqiniupkg.com/x/log%2ev7.SetOutput   b
+  0runtime.morestack_noctxt       "".w  type.io.Writer    @  
+ & TgclocalsÂ·2a1dd1e1e59d0a384c26951e316cd7e6 TgclocalsÂ·33cdeccccebe80329f1fdbee7f5874cb   ~/home/archer/Documents/Gosrc/src/qiniupkg.com/x/xlog.v7/xlog.goş"".SetFlags  `  ZdH‹%    H;avHƒìH‹\$H‰$è    HƒÄÃè    ëÓ
+      :
+  @qiniupkg.com/x/log%2ev7.SetFlags   N
+  0runtime.morestack_noctxt     "".flag  type.int 
+ 0 ˜
+ 
+  TgclocalsÂ·5184031d3a32a42d85027f073f873668 TgclocalsÂ·33cdeccccebe80329f1fdbee7f5874cb   ~/home/archer/Documents/Gosrc/src/qiniupkg.com/x/xlog.v7/xlog.goş""".SetOutputLevel  `  ZdH‹%    H;avHƒìH‹\$H‰$è    HƒÄÃè    ëÓ
+      :
+  Lqiniupkg.com/x/log%2ev7.SetOutputLevel   N
+  0runtime.morestack_noctxt     "".lvl  type.int 
+ 0  
+ 
+  TgclocalsÂ·5184031d3a32a42d85027f073f873668 TgclocalsÂ·33cdeccccebe80329f1fdbee7f5874cb   ~/home/archer/Documents/Gosrc/src/qiniupkg.com/x/xlog.v7/xlog.goş"".init  à  ĞdH‹%    H;avR¶    €û t¶    €ûuÃè    Æ    è    è    è    è    è    è    è    Æ    Ãè    ë˜
+      $  "".initdoneÂ·   <  "".initdoneÂ·   R
+  "runtime.throwinit   b "".initdoneÂ·   n
+  fmt.init   x
+  io.init   ‚
+  os.init   Œ
+  runtime.init   –
+  8qiniupkg.com/x/log%2ev7.init    
+  <qiniupkg.com/x/reqid%2ev7.init   ª
+  :golang.org/x/net/context.init   ¶ "".initdoneÂ·   Ä
+  0runtime.morestack_noctxt        p p ¤p 
+ (H TgclocalsÂ·33cdeccccebe80329f1fdbee7f5874cb TgclocalsÂ·33cdeccccebe80329f1fdbee7f5874cb   ~/home/archer/Documents/Gosrc/src/qiniupkg.com/x/xlog.v7/xlog.goş4type..hash.[1]interface {} à  ÊdH‹%    H;a†ˆ   Hƒì(H‹L$81ÀHÇD$   H‹l$H9è}\H‰D$ H‰ÅH‰ÈHÁÀH»¿c»kïR H¯ØH‰ØH‹\$0Hƒû t;HÁåHëH‰$H‰D$8H‰D$è    H‹L$H‹D$ HÿÀH‹l$H9è|¤H‰L$@HƒÄ(Ã‰ëÁè    é[ÿÿÿ
+      ä
+  (runtime.nilinterhash   ¸
+  0runtime.morestack_noctxt   0P  
+"".autotmp_0038 type.int "".autotmp_0037 type.int "".~r2  type.uintptr "".h type.uintptr "".p  *type.*[1]interface {} POP ° ° 
+ q? TgclocalsÂ·0b86ef39f3fed835f14ba5f4d7c62fa2 TgclocalsÂ·33cdeccccebe80329f1fdbee7f5874cb   ~/home/archer/Documents/Gosrc/src/qiniupkg.com/x/xlog.v7/xlog.goş0type..eq.[1]interface {} à  ÖdH‹%    H;a†Î   HƒìX1ÀHÇD$(   H‹l$(H9è’   H‰D$0H‹\$hHƒû „–   H‰ÅHÁåHëH‹H‹sH‹\$`Hƒû tvH‰ÅHÁåHëH‹H‹SH9ÈuVH‰D$8H‰$H‰T$@H‰T$H‰L$HH‰L$H‰t$PH‰t$è    ¶\$ €û t H‹D$0HÿÀH‹l$(H9èŒnÿÿÿÆD$pHƒÄXÃÆD$p HƒÄXÃ‰ë†‰écÿÿÿè    éÿÿÿ
+      ¼
+  runtime.efaceeq   Ä
+  0runtime.morestack_noctxt   0°  "".autotmp_0042 ?"type.interface {} "".autotmp_0041 "type.interface {} "".autotmp_0040 _type.int "".autotmp_0039 Otype.int "".~r2  type.bool "".q *type.*[1]interface {} "".p  *type.*[1]interface {} &°´¯°	¯° ğ ğ  S TgclocalsÂ·3bb21ca8fe1d99a3e492463bd711418a TgclocalsÂ·a8eabfc4a4514ed6b3b0c61e9680e440   ~/home/archer/Documents/Gosrc/src/qiniupkg.com/x/xlog.v7/xlog.goşTgclocalsÂ·0c8aa8e80191a30eac23f1a218103f16                   şTgclocalsÂ·41a13ac73c712c01973b8fe23f62d694                  şjgo.string.hdr."xlog.New: reqid isn't find in context"             %          bgo.string."xlog.New: reqid isn't find in context"   şbgo.string."xlog.New: reqid isn't find in context" P  Lxlog.New: reqid isn't find in context  şTgclocalsÂ·a6aa5fa31cf79a6e5fbaf02b2805987e @  @          `   â  â   b   a    şTgclocalsÂ·bbe2f308595eed0631fb6c42f0ddbda2 @  @                         ş"go.string.hdr."."                       go.string."."   şgo.string."."   .  şTgclocalsÂ·2c033e7f4f4a74cc7e9f368d1fec9f60                   şTgclocalsÂ·aefd16b155593f6f07980a05b297ad1f                  şTgclocalsÂ·23e8278e2b69a3a75fa59b23c49ed6ad              şTgclocalsÂ·0ebb2d1da58c1b4224bf5a7b370d7578             şTgclocalsÂ·23e8278e2b69a3a75fa59b23c49ed6ad              şTgclocalsÂ·c6134a2ac139b68c0737f8b03170e2ac             şTgclocalsÂ·23e8278e2b69a3a75fa59b23c49ed6ad              şTgclocalsÂ·0ebb2d1da58c1b4224bf5a7b370d7578             şTgclocalsÂ·23e8278e2b69a3a75fa59b23c49ed6ad              şTgclocalsÂ·c6134a2ac139b68c0737f8b03170e2ac             şTgclocalsÂ·23e8278e2b69a3a75fa59b23c49ed6ad              şTgclocalsÂ·0ebb2d1da58c1b4224bf5a7b370d7578             şTgclocalsÂ·23e8278e2b69a3a75fa59b23c49ed6ad              şTgclocalsÂ·c6134a2ac139b68c0737f8b03170e2ac             şTgclocalsÂ·23e8278e2b69a3a75fa59b23c49ed6ad              şTgclocalsÂ·0ebb2d1da58c1b4224bf5a7b370d7578             şTgclocalsÂ·23e8278e2b69a3a75fa59b23c49ed6ad              şTgclocalsÂ·c6134a2ac139b68c0737f8b03170e2ac             şTgclocalsÂ·23e8278e2b69a3a75fa59b23c49ed6ad              şTgclocalsÂ·0ebb2d1da58c1b4224bf5a7b370d7578             şTgclocalsÂ·23e8278e2b69a3a75fa59b23c49ed6ad              şTgclocalsÂ·c6134a2ac139b68c0737f8b03170e2ac             şTgclocalsÂ·23e8278e2b69a3a75fa59b23c49ed6ad              şTgclocalsÂ·0ebb2d1da58c1b4224bf5a7b370d7578             şTgclocalsÂ·23e8278e2b69a3a75fa59b23c49ed6ad              şTgclocalsÂ·0ebb2d1da58c1b4224bf5a7b370d7578             şTgclocalsÂ·23e8278e2b69a3a75fa59b23c49ed6ad              şTgclocalsÂ·c6134a2ac139b68c0737f8b03170e2ac             şTgclocalsÂ·23e8278e2b69a3a75fa59b23c49ed6ad              şTgclocalsÂ·0ebb2d1da58c1b4224bf5a7b370d7578             şTgclocalsÂ·0f976e590c2193ea3cbcc4d997cd3f2d (  (                 şTgclocalsÂ·14c16763214c88f6ebc22b4b638329b7 (  (                şTgclocalsÂ·0f976e590c2193ea3cbcc4d997cd3f2d (  (                 şTgclocalsÂ·c850c5a2fb77dc8d291a85b90724aa4c (  (                şTgclocalsÂ·0f976e590c2193ea3cbcc4d997cd3f2d (  (                 şTgclocalsÂ·14c16763214c88f6ebc22b4b638329b7 (  (                ş$go.string.hdr."\n"                       go.string."\n"   şgo.string."\n"   
+  şTgclocalsÂ·2a694b485aa8ae86a166ed10b620ccf4 0  0   
+                 şTgclocalsÂ·304f1a7ece42768e76e94191b15e0406 0  0                   şTgclocalsÂ·2a694b485aa8ae86a166ed10b620ccf4 0  0   
+                 şTgclocalsÂ·304f1a7ece42768e76e94191b15e0406 0  0                   şTgclocalsÂ·33cdeccccebe80329f1fdbee7f5874cb           şTgclocalsÂ·2a1dd1e1e59d0a384c26951e316cd7e6             şTgclocalsÂ·33cdeccccebe80329f1fdbee7f5874cb           şTgclocalsÂ·5184031d3a32a42d85027f073f873668              şTgclocalsÂ·33cdeccccebe80329f1fdbee7f5874cb           şTgclocalsÂ·5184031d3a32a42d85027f073f873668              şTgclocalsÂ·33cdeccccebe80329f1fdbee7f5874cb           şTgclocalsÂ·33cdeccccebe80329f1fdbee7f5874cb           ş0"".initdoneÂ·  type.uint8   ş"".NewÂ·f              "".New   ş"".NewWithÂ·f              "".NewWith   ş*"".(*Logger).SpawnÂ·f              $"".(*Logger).Spawn   ş*"".(*Logger).PrintÂ·f              $"".(*Logger).Print   ş,"".(*Logger).PrintfÂ·f              &"".(*Logger).Printf   ş."".(*Logger).PrintlnÂ·f              ("".(*Logger).Println   ş,"".(*Logger).DebugfÂ·f              &"".(*Logger).Debugf   ş*"".(*Logger).DebugÂ·f              $"".(*Logger).Debug   ş*"".(*Logger).InfofÂ·f              $"".(*Logger).Infof   ş("".(*Logger).InfoÂ·f              """.(*Logger).Info   ş*"".(*Logger).WarnfÂ·f              $"".(*Logger).Warnf   ş("".(*Logger).WarnÂ·f              """.(*Logger).Warn   ş,"".(*Logger).ErrorfÂ·f              &"".(*Logger).Errorf   ş*"".(*Logger).ErrorÂ·f              $"".(*Logger).Error   ş*"".(*Logger).FatalÂ·f              $"".(*Logger).Fatal   ş,"".(*Logger).FatalfÂ·f              &"".(*Logger).Fatalf   ş."".(*Logger).FatallnÂ·f              ("".(*Logger).Fatalln   ş*"".(*Logger).PanicÂ·f              $"".(*Logger).Panic   ş,"".(*Logger).PanicfÂ·f              &"".(*Logger).Panicf   ş."".(*Logger).PaniclnÂ·f              ("".(*Logger).Panicln   ş*"".(*Logger).StackÂ·f              $"".(*Logger).Stack   ş6"".(*Logger).SingleStackÂ·f              0"".(*Logger).SingleStack   ş"".SetOutputÂ·f              "".SetOutput   ş"".SetFlagsÂ·f              "".SetFlags   ş("".SetOutputLevelÂ·f              """.SetOutputLevel   ş"".initÂ·f              "".init   ş"runtime.gcbits.01    ş8go.string.hdr."*xlog.Logger"                       0go.string."*xlog.Logger"   ş0go.string."*xlog.Logger"    *xlog.Logger  ş"runtime.gcbits.03    ş8go.string.hdr."interface {}"                       0go.string."interface {}"   ş0go.string."interface {}"    interface {}  ş"type.interface {} À  À              çW                                                                          0€  runtime.algarray   @  "runtime.gcbits.03   P  8go.string.hdr."interface {}"   p  4go.weak.type.*interface {}   €  "runtime.zerovalue   À "type.interface {}   ş<go.string.hdr."[]interface {}"                       4go.string."[]interface {}"   ş4go.string."[]interface {}"    []interface {}  ş&type.[]interface {}                   p“ê/                                                         0   runtime.algarray   @  "runtime.gcbits.01   P  <go.string.hdr."[]interface {}"   p  8go.weak.type.*[]interface {}   €  "runtime.zerovalue     "type.interface {}   şRgo.typelink.[]interface {}	[]interface {}              &type.[]interface {}   şfgo.string.hdr."func(*xlog.Logger, ...interface {})"             #          ^go.string."func(*xlog.Logger, ...interface {})"   ş^go.string."func(*xlog.Logger, ...interface {})" P  Hfunc(*xlog.Logger, ...interface {})  şLtype.func(*"".Logger, ...interface {})                   õŞü 3                                                                                                                     0€  runtime.algarray   @  "runtime.gcbits.01   P  fgo.string.hdr."func(*xlog.Logger, ...interface {})"   p  ^go.weak.type.*func(*"".Logger, ...interface {})   €  "runtime.zerovalue    € Ltype.func(*"".Logger, ...interface {})   Ğ  Ltype.func(*"".Logger, ...interface {})   €  type.*"".Logger     &type.[]interface {}   ş¢go.typelink.func(*xlog.Logger, ...interface {})	func(*"".Logger, ...interface {})              Ltype.func(*"".Logger, ...interface {})   şvgo.string.hdr."func(*xlog.Logger, string, ...interface {})"             +          ngo.string."func(*xlog.Logger, string, ...interface {})"   şngo.string."func(*xlog.Logger, string, ...interface {})" `  Xfunc(*xlog.Logger, string, ...interface {})  ş\type.func(*"".Logger, string, ...interface {}) °  °              ô¥Ê 3                                                                                                                             0€  runtime.algarray   @  "runtime.gcbits.01   P  vgo.string.hdr."func(*xlog.Logger, string, ...interface {})"   p  ngo.weak.type.*func(*"".Logger, string, ...interface {})   €  "runtime.zerovalue    € \type.func(*"".Logger, string, ...interface {})   Ğ° \type.func(*"".Logger, string, ...interface {})   €  type.*"".Logger     type.string      &type.[]interface {}   şÂgo.typelink.func(*xlog.Logger, string, ...interface {})	func(*"".Logger, string, ...interface {})              \type.func(*"".Logger, string, ...interface {})   şngo.string.hdr."func(*xlog.Logger, string) *xlog.Logger"             '          fgo.string."func(*xlog.Logger, string) *xlog.Logger"   şfgo.string."func(*xlog.Logger, string) *xlog.Logger" P  Pfunc(*xlog.Logger, string) *xlog.Logger  şPtype.func(*"".Logger, string) *"".Logger °  °              8†N 3                                                                                                                            0€  runtime.algarray   @  "runtime.gcbits.01   P  ngo.string.hdr."func(*xlog.Logger, string) *xlog.Logger"   p  bgo.weak.type.*func(*"".Logger, string) *"".Logger   €  "runtime.zerovalue    € Ptype.func(*"".Logger, string) *"".Logger   Ğ  Ptype.func(*"".Logger, string) *"".Logger   €  type.*"".Logger     type.string      type.*"".Logger   ş®go.typelink.func(*xlog.Logger, string) *xlog.Logger	func(*"".Logger, string) *"".Logger              Ptype.func(*"".Logger, string) *"".Logger   ş*go.string.hdr."Debug"                       "go.string."Debug"   ş"go.string."Debug"   Debug  şJgo.string.hdr."func(...interface {})"                       Bgo.string."func(...interface {})"   şBgo.string."func(...interface {})" 0  ,func(...interface {})  ş4type.func(...interface {})                 Ë 3                                                                                                             0€  runtime.algarray   @  "runtime.gcbits.01   P  Jgo.string.hdr."func(...interface {})"   p  Fgo.weak.type.*func(...interface {})   €  "runtime.zerovalue    € 4type.func(...interface {})   Ğ 4type.func(...interface {})   €  &type.[]interface {}   şngo.typelink.func(...interface {})	func(...interface {})              4type.func(...interface {})   ş,go.string.hdr."Debugf"                       $go.string."Debugf"   ş$go.string."Debugf"   Debugf  şZgo.string.hdr."func(string, ...interface {})"                       Rgo.string."func(string, ...interface {})"   şRgo.string."func(string, ...interface {})" @  <func(string, ...interface {})  şDtype.func(string, ...interface {})                   õµ@µ 3                                                                                                                     0€  runtime.algarray   @  "runtime.gcbits.01   P  Zgo.string.hdr."func(string, ...interface {})"   p  Vgo.weak.type.*func(string, ...interface {})   €  "runtime.zerovalue    € Dtype.func(string, ...interface {})   Ğ  Dtype.func(string, ...interface {})   €  type.string     &type.[]interface {}   şgo.typelink.func(string, ...interface {})	func(string, ...interface {})              Dtype.func(string, ...interface {})   ş*go.string.hdr."Error"                       "go.string."Error"   ş"go.string."Error"   Error  ş,go.string.hdr."Errorf"                       $go.string."Errorf"   ş$go.string."Errorf"   Errorf  ş*go.string.hdr."Fatal"                       "go.string."Fatal"   ş"go.string."Fatal"   Fatal  ş,go.string.hdr."Fatalf"                       $go.string."Fatalf"   ş$go.string."Fatalf"   Fatalf  ş.go.string.hdr."Fatalln"                       &go.string."Fatalln"   ş&go.string."Fatalln"   Fatalln  ş(go.string.hdr."Info"                        go.string."Info"   ş go.string."Info"   
+Info  ş*go.string.hdr."Infof"                       "go.string."Infof"   ş"go.string."Infof"   Infof  ş*go.string.hdr."Panic"                       "go.string."Panic"   ş"go.string."Panic"   Panic  ş,go.string.hdr."Panicf"                       $go.string."Panicf"   ş$go.string."Panicf"   Panicf  ş.go.string.hdr."Panicln"                       &go.string."Panicln"   ş&go.string."Panicln"   Panicln  ş*go.string.hdr."Print"                       "go.string."Print"   ş"go.string."Print"   Print  ş,go.string.hdr."Printf"                       $go.string."Printf"   ş$go.string."Printf"   Printf  ş.go.string.hdr."Println"                       &go.string."Println"   ş&go.string."Println"   Println  ş6go.string.hdr."SingleStack"                       .go.string."SingleStack"   ş.go.string."SingleStack"    SingleStack  ş*go.string.hdr."Spawn"                       "go.string."Spawn"   ş"go.string."Spawn"   Spawn  şRgo.string.hdr."func(string) *xlog.Logger"                       Jgo.string."func(string) *xlog.Logger"   şJgo.string."func(string) *xlog.Logger" @  4func(string) *xlog.Logger  ş8type.func(string) *"".Logger                   ¤*Q 3                                                                                                                    0€  runtime.algarray   @  "runtime.gcbits.01   P  Rgo.string.hdr."func(string) *xlog.Logger"   p  Jgo.weak.type.*func(string) *"".Logger   €  "runtime.zerovalue    € 8type.func(string) *"".Logger   Ğ 8type.func(string) *"".Logger   €  type.string     type.*"".Logger   şzgo.typelink.func(string) *xlog.Logger	func(string) *"".Logger              8type.func(string) *"".Logger   ş*go.string.hdr."Stack"                       "go.string."Stack"   ş"go.string."Stack"   Stack  ş(go.string.hdr."Warn"                        go.string."Warn"   ş go.string."Warn"   
+Warn  ş*go.string.hdr."Warnf"                       "go.string."Warnf"   ş"go.string."Warnf"   Warnf  ştype.*"".Logger  ğ  ğ              úiX 6                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              Ø0   runtime.algarray   @  "runtime.gcbits.01   P  8go.string.hdr."*xlog.Logger"   p  0go.weak.type.**"".Logger   €  "runtime.zerovalue     type."".Logger   `  type.*"".Logger   Àğ type.*"".Logger   ğ  *go.string.hdr."Debug"     4type.func(...interface {})      Ltype.func(*"".Logger, ...interface {})   °  $"".(*Logger).Debug   À  $"".(*Logger).Debug   Ğ  ,go.string.hdr."Debugf"   ğ  Dtype.func(string, ...interface {})   €  \type.func(*"".Logger, string, ...interface {})     &"".(*Logger).Debugf      &"".(*Logger).Debugf   °  *go.string.hdr."Error"   Ğ  4type.func(...interface {})   à  Ltype.func(*"".Logger, ...interface {})   ğ  $"".(*Logger).Error   €  $"".(*Logger).Error     ,go.string.hdr."Errorf"   °  Dtype.func(string, ...interface {})   À  \type.func(*"".Logger, string, ...interface {})   Ğ  &"".(*Logger).Errorf   à  &"".(*Logger).Errorf   ğ  *go.string.hdr."Fatal"     4type.func(...interface {})      Ltype.func(*"".Logger, ...interface {})   °  $"".(*Logger).Fatal   À  $"".(*Logger).Fatal   Ğ  ,go.string.hdr."Fatalf"   ğ  Dtype.func(string, ...interface {})   €  \type.func(*"".Logger, string, ...interface {})     &"".(*Logger).Fatalf      &"".(*Logger).Fatalf   °  .go.string.hdr."Fatalln"   Ğ  4type.func(...interface {})   à  Ltype.func(*"".Logger, ...interface {})   ğ  ("".(*Logger).Fatalln   €  ("".(*Logger).Fatalln     (go.string.hdr."Info"   °  4type.func(...interface {})   À  Ltype.func(*"".Logger, ...interface {})   Ğ  """.(*Logger).Info   à  """.(*Logger).Info   ğ  *go.string.hdr."Infof"     Dtype.func(string, ...interface {})      \type.func(*"".Logger, string, ...interface {})   °  $"".(*Logger).Infof   À  $"".(*Logger).Infof   Ğ  *go.string.hdr."Panic"   ğ  4type.func(...interface {})   €	  Ltype.func(*"".Logger, ...interface {})   	  $"".(*Logger).Panic    	  $"".(*Logger).Panic   °	  ,go.string.hdr."Panicf"   Ğ	  Dtype.func(string, ...interface {})   à	  \type.func(*"".Logger, string, ...interface {})   ğ	  &"".(*Logger).Panicf   €
+  &"".(*Logger).Panicf   
+  .go.string.hdr."Panicln"   °
+  4type.func(...interface {})   À
+  Ltype.func(*"".Logger, ...interface {})   Ğ
+  ("".(*Logger).Panicln   à
+  ("".(*Logger).Panicln   ğ
+  *go.string.hdr."Print"     4type.func(...interface {})      Ltype.func(*"".Logger, ...interface {})   °  $"".(*Logger).Print   À  $"".(*Logger).Print   Ğ  ,go.string.hdr."Printf"   ğ  Dtype.func(string, ...interface {})   €  \type.func(*"".Logger, string, ...interface {})     &"".(*Logger).Printf      &"".(*Logger).Printf   °  .go.string.hdr."Println"   Ğ  4type.func(...interface {})   à  Ltype.func(*"".Logger, ...interface {})   ğ  ("".(*Logger).Println   €  ("".(*Logger).Println     6go.string.hdr."SingleStack"   °  4type.func(...interface {})   À  Ltype.func(*"".Logger, ...interface {})   Ğ  0"".(*Logger).SingleStack   à  0"".(*Logger).SingleStack   ğ  *go.string.hdr."Spawn"     8type.func(string) *"".Logger      Ptype.func(*"".Logger, string) *"".Logger   °  $"".(*Logger).Spawn   À  $"".(*Logger).Spawn   Ğ  *go.string.hdr."Stack"   ğ  4type.func(...interface {})   €  Ltype.func(*"".Logger, ...interface {})     $"".(*Logger).Stack      $"".(*Logger).Stack   °  (go.string.hdr."Warn"   Ğ  4type.func(...interface {})   à  Ltype.func(*"".Logger, ...interface {})   ğ  """.(*Logger).Warn   €  """.(*Logger).Warn     *go.string.hdr."Warnf"   °  Dtype.func(string, ...interface {})   À  \type.func(*"".Logger, string, ...interface {})   Ğ  $"".(*Logger).Warnf   à  $"".(*Logger).Warnf   ş6go.string.hdr."xlog.Logger"                       .go.string."xlog.Logger"   ş.go.string."xlog.Logger"    xlog.Logger  ş*go.string.hdr."ReqId"                       "go.string."ReqId"   ş"go.string."ReqId"   ReqId  ş,go.string.hdr."Logger"                       $go.string."Logger"   ş$go.string."Logger"   Logger  şLgo.string.hdr."qiniupkg.com/x/xlog.v7"                       Dgo.string."qiniupkg.com/x/xlog.v7"   şDgo.string."qiniupkg.com/x/xlog.v7" 0  .qiniupkg.com/x/xlog.v7  ş"go.importpath."".                       Dgo.string."qiniupkg.com/x/xlog.v7"   ştype."".Logger  à  à              ¡ª±                                                                                                                                                       0À  runtime.algarray   @  "runtime.gcbits.01   P  6go.string.hdr."xlog.Logger"   p  type.*"".Logger   €  "runtime.zerovalue   À type."".Logger   À  *go.string.hdr."ReqId"   à  type.string   ` type."".Logger     ,go.string.hdr."Logger"      "go.importpath."".   °à type."".Logger   şTgclocalsÂ·33cdeccccebe80329f1fdbee7f5874cb           şTgclocalsÂ·0b86ef39f3fed835f14ba5f4d7c62fa2             şTgclocalsÂ·a8eabfc4a4514ed6b3b0c61e9680e440              şTgclocalsÂ·3bb21ca8fe1d99a3e492463bd711418a             ş<type..hashfunc.[1]interface {}              4type..hash.[1]interface {}   ş8type..eqfunc.[1]interface {}              0type..eq.[1]interface {}   ş2type..alg.[1]interface {}                        <type..hashfunc.[1]interface {}     8type..eqfunc.[1]interface {}   ş>go.string.hdr."[1]interface {}"                       6go.string."[1]interface {}"   ş6go.string."[1]interface {}"     [1]interface {}  ş(type.[1]interface {} À  À              P‘[ú                                                                        0  2type..alg.[1]interface {}   @  "runtime.gcbits.03   P  >go.string.hdr."[1]interface {}"   p  :go.weak.type.*[1]interface {}   €  "runtime.zerovalue     "type.interface {}      &type.[]interface {}   şVgo.typelink.[1]interface {}	[1]interface {}              (type.[1]interface {}   ş@go.string.hdr."*[1]interface {}"                       8go.string."*[1]interface {}"   ş8go.string."*[1]interface {}" 0  "*[1]interface {}  ş*type.*[1]interface {}                   ¿¨5 6                                                        0   runtime.algarray   @  "runtime.gcbits.01   P  @go.string.hdr."*[1]interface {}"   p  <go.weak.type.**[1]interface {}   €  "runtime.zerovalue     (type.[1]interface {}   ş.go.string.hdr."[]uint8"                       &go.string."[]uint8"   ş&go.string."[]uint8"   []uint8  ştype.[]uint8                   ß~.8                                                         0   runtime.algarray   @  "runtime.gcbits.01   P  .go.string.hdr."[]uint8"   p  *go.weak.type.*[]uint8   €  "runtime.zerovalue     type.uint8   ş6go.typelink.[]uint8	[]uint8              type.[]uint8   ş type..hashfunc32                        ,runtime.memhash_varlen   ştype..eqfunc32                        .runtime.memequal_varlen   ştype..alg32                         type..hashfunc32     type..eqfunc32   şruntime.gcbits.      ş2go.string.hdr."[32]uint8"             	          *go.string."[32]uint8"   ş*go.string."[32]uint8"    [32]uint8  ştype.[32]uint8 À  À                œYÿ¨ ‘                                                                        0  type..alg32   @  runtime.gcbits.   P  2go.string.hdr."[32]uint8"   p  .go.weak.type.*[32]uint8   €  "runtime.zerovalue     type.uint8      type.[]uint8   ş>go.typelink.[32]uint8	[32]uint8              type.[32]uint8   ş.go.string.hdr."runtime"                       &go.string."runtime"   ş&go.string."runtime"   runtime  ş,go.importpath.runtime.                       &go.string."runtime"   ş&go.string.hdr."fmt"                       go.string."fmt"   şgo.string."fmt"   fmt  ş$go.importpath.fmt.                       go.string."fmt"   ş$go.string.hdr."io"                       go.string."io"   şgo.string."io"   io  ş"go.importpath.io.                       go.string."io"   ş$go.string.hdr."os"                       go.string."os"   şgo.string."os"   os  ş"go.importpath.os.                       go.string."os"   şJgo.string.hdr."qiniupkg.com/x/log.v7"                       Bgo.string."qiniupkg.com/x/log.v7"   şBgo.string."qiniupkg.com/x/log.v7" 0  ,qiniupkg.com/x/log.v7  şLgo.importpath.qiniupkg.com/x/log%2ev7.                       Bgo.string."qiniupkg.com/x/log.v7"   şNgo.string.hdr."qiniupkg.com/x/reqid.v7"                       Fgo.string."qiniupkg.com/x/reqid.v7"   şFgo.string."qiniupkg.com/x/reqid.v7" 0  0qiniupkg.com/x/reqid.v7  şPgo.importpath.qiniupkg.com/x/reqid%2ev7.                       Fgo.string."qiniupkg.com/x/reqid.v7"   şPgo.string.hdr."golang.org/x/net/context"                       Hgo.string."golang.org/x/net/context"   şHgo.string."golang.org/x/net/context" @  2golang.org/x/net/context  şNgo.importpath.golang.org/x/net/context.                       Hgo.string."golang.org/x/net/context"   ş:type..hash.[1]interface {}Â·f              4type..hash.[1]interface {}   ş6type..eq.[1]interface {}Â·f              0type..eq.[1]interface {}   ş"runtime.zerovalue      ÿÿgo13ld
