@@ -17,10 +17,11 @@ func main() {
 	bucket := c.Bucket("brpublic")
 	ctx := context.Background()
 	localFile := argsWithoutProg[0]
-	err := bucket.PutFile(ctx, nil, "videos/"+localFile, localFile, nil)
+	err := bucket.PutFile(ctx, nil, "rigo/"+localFile, localFile, nil)
 	if err != nil {
 		fmt.Println(err)
 	} else {
 		fmt.Println("upload success")
+		fmt.Println("http://7xj2i2.com2.z0.glb.qiniucdn.com/rigo/" + localFile)
 	}
 }

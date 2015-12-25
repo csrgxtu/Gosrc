@@ -1,0 +1,198 @@
+/* article style v0.1 */
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+main, menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, main, menu, nav, section {
+	display: block;
+}
+
+body {
+	padding: 0 0 40px;
+	color: #111;
+	line-height: 1.8em;
+	word-break:break-all;
+	word-wrap:break-word;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+
+
+
+/*-------------------------*/
+
+
+/*头图*/
+.featurePic{
+	width: 100%;
+	height: auto;
+	text-align: center;
+	margin-bottom: 30px;
+}
+
+
+/*主标题*/
+h1{
+	color: #111;
+	font-size: 20px;
+	line-height: 1.8em;
+	text-align: center;
+	padding: 0 20px;
+	margin-bottom: 20px;
+}
+
+/*作者*/
+.author{
+	color: #999;
+	font-size: 13px;
+	text-align: center;
+	padding: 0 20px;
+	margin-bottom: 20px;
+}
+
+
+
+/*-------------------------*/
+
+
+/*小标题*/
+h2{
+	font-size: 17px;
+	font-weight: 200%;
+	padding: 0 20px;
+	margin-bottom: 20px;
+}
+
+/*说明强调*/
+h3{
+	color: #E84417;
+	font-size: 15px;
+	padding: 0 20px;
+	margin-bottom: 20px;
+}
+
+/*居中*/
+h4{
+	font-size: 15px;
+	text-align: center;
+	padding: 0 20px;
+	margin-bottom: 20px;
+}
+
+/*图说*/
+h5{
+	color: #999;
+	font-size: 12px;
+	text-align: center;
+	padding: 0 20px;
+	margin-top: -10px;
+	margin-bottom: 20px;
+}
+
+/*正文*/
+p{
+	font-size: 15px;
+	color: #111;
+	line-height: 1.8em;
+	padding: 0 20px;
+	margin-bottom: 20px;
+}
+
+/*图片*/
+img{
+	max-width: 100%;
+	min-width: auto;
+	display: block;
+	height: auto;
+	text-align: center;
+	margin: 0 auto 20px;
+}
+
+
+
+/*加粗*/
+b{
+	
+}
+
+/*斜体*/
+i, cite, em{
+	font-style: italic;
+}
+
+
+/*有序列表*/
+ol, ul{
+	font-size: 15px;
+	padding: 0 0 0 20px;
+	margin:0 20px 20px;
+}
+
+/*列表项*/
+ol li{
+	list-style: decimal;
+	margin-bottom: 4px;
+}
+
+ul li{
+	list-style: disc;
+	margin-bottom: 4px;
+}
+
+
+/*引语*/
+blockquote{
+	color: #888 !important;
+	font-size: 13px;
+	padding: 0 0 0 15px;
+	border-left: 2px solid #ddd;
+	margin: 0 20px;
+	/*quotes: none;*/
+}
+
+blockquote:before, blockquote:after{
+	content: '';
+	content: none;
+}
+
+blockquote *{
+	color: #888;
+	padding: 0;
+}
+
+
+
+/*超链接*/
+a{
+	color: #50719b;
+	font-size: 15px;
+	text-decoration: none;
+}
+
+a:hover, a:active {
+	color: #50719b;
+    outline: none;
+}
+
+
