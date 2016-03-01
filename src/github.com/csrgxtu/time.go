@@ -15,5 +15,5 @@ func main() {
 		return
 	}
 
-	fmt.Println(t)
+	fmt.Println(t.Month())
 }
